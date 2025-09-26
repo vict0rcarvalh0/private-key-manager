@@ -8,14 +8,6 @@ A CLI tool for generating Solana keypairs and converting between private key for
 - Convert private keys from base58 to wallet byte array format
 - Convert wallet byte arrays to base58 private keys
 
-## Dependencies
-
-- `solana-sdk` - Solana SDK for keypair generation
-- `bs58` - Base58 encoding/decoding
-- `borsh` - Binary serialization
-- `solana-client` - Solana client functionality
-- `solana-program` - Solana program utilities
-
 ## Usage
 
 ### Generate a New Keypair
@@ -57,18 +49,9 @@ This will:
 - Convert it to base58 format
 - Display the base58 encoded private key
 
-## Project Structure
-
-```
-src/
-├── lib.rs          # Main library file
-└── prereqs.rs      # Test functions for keypair operations
-```
-
 ## Development
 
 This project uses Rust and Cargo for dependency management. All functionality is implemented as test functions that can be run individually using `cargo test` with the `--nocapture` flag to see output.
 
-## Security Note
-
-Keep your private keys secure and never share them. This tool is for development and testing purposes.
+> [!IMPORTANT]  
+> Keep your private keys secure and never share them. This tool is for development and testing purposes.
