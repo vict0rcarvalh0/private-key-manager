@@ -163,22 +163,26 @@ export function PrivateKeyManager() {
       
       if (conversionMode === "base58-to-bytes") {
         const bytes = base58ToBytes(inputText.trim())
-        output = Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join('')
-        } else {
-        // Parse hex string to bytes
-        const hexString = inputText.trim().replace(/^0x/, '')
-        if (hexString.length % 2 !== 0) {
-          throw new Error("Invalid hex string length")
+        output = `[${Array.from(bytes).join(', ')}]`
+      } else {
+        // Parse byte array string to bytes
+        const byteArrayString = inputText.trim()
+        
+        // Remove brackets and parse the array
+        const cleanString = byteArrayString.replace(/^\[|\]$/g, '').trim()
+        if (!cleanString) {
+          throw new Error("Empty byte array")
         }
         
-        const bytes = new Uint8Array(hexString.length / 2)
-        for (let i = 0; i < hexString.length; i += 2) {
-          const hex = hexString.substr(i, 2)
-          const byte = parseInt(hex, 16)
-          if (isNaN(byte)) {
-            throw new Error(`Invalid hex character: ${hex}`)
+        const byteStrings = cleanString.split(',').map(s => s.trim())
+        const bytes = new Uint8Array(byteStrings.length)
+        
+        for (let i = 0; i < byteStrings.length; i++) {
+          const byteValue = parseInt(byteStrings[i], 10)
+          if (isNaN(byteValue) || byteValue < 0 || byteValue > 255) {
+            throw new Error(`Invalid byte value: ${byteStrings[i]}. Must be between 0 and 255.`)
           }
-          bytes[i / 2] = byte
+          bytes[i] = byteValue
         }
         
         output = bytesToBase58(bytes)
@@ -333,7 +337,7 @@ export function PrivateKeyManager() {
               <div className="space-y-3 md:space-y-6">
                 <div className="flex items-center justify-between mb-3 md:mb-6 select-none">
                   <label className="text-xs md:text-sm font-medium text-gray-300">
-                    {conversionMode === "base58-to-bytes" ? "Enter Base58 private key" : "Enter hex byte array"}
+                    {conversionMode === "base58-to-bytes" ? "Enter Base58 private key" : "Enter byte array"}
                   </label>
                 </div>
                 <textarea
@@ -343,7 +347,7 @@ export function PrivateKeyManager() {
                   placeholder={
                     conversionMode === "base58-to-bytes"
                       ? "Enter your Base58 private key here..."
-                      : "Enter hex byte array (e.g., 0x1234abcd...)"
+                      : "Enter byte array (e.g., [123, 45, 67, 89, ...])"
                   }
                   className="w-full h-16 md:h-32 p-2 md:p-4 bg-black/50 border border-gray-600 rounded resize-none focus:outline-none focus:ring-2 focus:ring-white text-white text-xs md:text-base select-text"
                   style={{
@@ -397,7 +401,7 @@ export function PrivateKeyManager() {
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
                         <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v9a2 2 0 01-2 2H5z" />
                       </svg>
-                      <span className="hidden sm:inline">Copy</span>
+                      <span className="hidden sm:inline">Copy Result</span>
                     </Button>
                     <Button
                       onClick={clearInput}
