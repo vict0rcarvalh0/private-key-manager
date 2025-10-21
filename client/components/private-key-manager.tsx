@@ -340,6 +340,19 @@ export function PrivateKeyManager() {
                     {conversionMode === "base58-to-bytes" ? "Enter Base58 private key" : "Enter byte array"}
                   </label>
                 </div>
+                
+                {/* Security Warning */}
+                <div className="bg-yellow-900/20 border border-yellow-600/30 rounded-lg p-3 mb-4">
+                  <div className="flex items-start gap-2">
+                    <svg className="w-4 h-4 text-yellow-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                    </svg>
+                    <div className="text-xs text-yellow-200">
+                      <p className="font-semibold mb-1">Security Notice</p>
+                      <p>We don't store your private keys anywhere. All conversions happen locally in your browser. It's your responsibility to keep your private keys secure.</p>
+                    </div>
+                  </div>
+                </div>
                 <textarea
                   value={inputText}
                   onChange={(e) => setInputText(e.target.value)}
