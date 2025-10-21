@@ -109,7 +109,7 @@ const randomPrompts = [
   "A magical bookstore where stories come alive and walk around",
 ]
 
-export function ImageCombiner() {
+export function PrivateKeyManager() {
   const [image1, setImage1] = useState<File | null>(null)
   const [image1Preview, setImage1Preview] = useState<string>("")
   const [image1Url, setImage1Url] = useState<string>("")
