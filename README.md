@@ -1,12 +1,59 @@
 # Private Key Manager
 
-A CLI tool for generating Solana keypairs and converting between private key formats. This project provides utilities to generate new Solana wallets and convert between base58 encoded private keys and wallet byte arrays.
+A comprehensive tool for managing Solana private keys with both a web interface and CLI tool. Convert between Base58 and Byte Array formats securely, with all processing happening locally in your browser or on your machine.
 
-## Features
+# Web Application
 
+A modern, client-side web application that runs entirely in your browser:
+
+- **Secure**: All conversions happen locally - no data is sent to servers
+- **Modern UI**: Clean, responsive interface with real-time conversion
+- **Base58 ↔ Byte Array**: Convert between both formats seamlessly
+- **Copy to Clipboard**: Easy copying of results
+- **Security Warning**: Clear notices about key safety
+
+### Features
+- Convert Base58 private keys to byte arrays `[123, 45, 67, ...]`
+- Convert byte arrays to Base58 private keys
+- Real-time validation and error handling
+- Copy results to clipboard with one click
+- Responsive design for desktop and mobile
+
+## CLI Tool
+
+A Rust-based command-line tool for advanced users and automation:
+
+### Features
 - Generate new Solana keypairs
 - Convert private keys from base58 to wallet byte array format
 - Convert wallet byte arrays to base58 private keys
+
+## Getting Started
+
+### Web Application
+
+1. Navigate to the `client` directory:
+   ```bash
+   cd client
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   pnpm install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm run dev
+   # or
+   pnpm dev
+   ```
+
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
+
+### CLI Tool
 
 ## Usage
 
@@ -49,9 +96,7 @@ This will:
 - Convert it to base58 format
 - Display the base58 encoded private key
 
-## Development
-
-This project uses Rust and Cargo for dependency management. All functionality is implemented as test functions that can be run individually using `cargo test` with the `--nocapture` flag to see output.
+## Security
 
 > [!IMPORTANT]  
-> Keep your private keys secure and never share them. This tool is for development and testing purposes.
+> **Your private keys are never stored or transmitted anywhere.** All conversions happen locally in your browser (web app) or on your machine (CLI). Keep your private keys secure and never share them.
