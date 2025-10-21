@@ -346,7 +346,7 @@ export function PrivateKeyManager() {
                   onKeyDown={handleKeyDown}
                   placeholder={
                     conversionMode === "base58-to-bytes"
-                      ? "Enter your Base58 private key here..."
+                      ? "Enter Base58 private key (e.g., 2Kb3kLf4zgWQ...)"
                       : "Enter byte array (e.g., [123, 45, 67, 89, ...])"
                   }
                   className="w-full h-16 md:h-32 p-2 md:p-4 bg-black/50 border border-gray-600 rounded resize-none focus:outline-none focus:ring-2 focus:ring-white text-white text-xs md:text-base select-text"
