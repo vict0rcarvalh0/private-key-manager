@@ -520,7 +520,7 @@ export function PrivateKeyManager() {
           </div>
 
           <div className="mt-4 md:mt-8 pt-3 md:pt-6 border-t border-gray-600/50 select-none">
-            <div className="flex items-center justify-center">
+            <div className="flex flex-col items-center justify-center space-y-2">
               <a
                 href="https://github.com/vict0rcarvalh0/private-key-manager"
                 target="_blank"
@@ -537,6 +537,23 @@ export function PrivateKeyManager() {
                   />
                 </svg>
               </a>
+              <div className="text-xs text-gray-400 flex items-center gap-1">
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+                <span>Pay the dev a coffee:</span>
+                <span>7cT1CkiNVB9nReUt8UoZAkA8tViq4Q6TbTXjYWQuoBGd</span>
+                <button
+                  onClick={() => copyToClipboard("7cT1CkiNVB9nReUt8UoZAkA8tViq4Q6TbTXjYWQuoBGd")}
+                  className="text-gray-400 pl-1 hover:text-white transition-colors duration-200 p-0.5 rounded"
+                  title="Copy wallet address"
+                >
+                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v9a2 2 0 01-2 2H5z" />
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
         </div>
