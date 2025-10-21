@@ -17,7 +17,12 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "Private Key Manager",
-  description: "Generate Solana keypairs and convert between private key formats.",
+  description: "Convert between Base58 and Byte Array private key formats securely in your browser.",
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
 }
 
 export default function RootLayout({
