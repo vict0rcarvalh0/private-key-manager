@@ -820,25 +820,6 @@ export function PrivateKeyManager() {
                   <span className="hidden sm:inline">Input</span>
                 </h3>
                 <div className="flex items-center gap-1 md:gap-2 flex-shrink-0">
-                  <Select value={aspectRatio} onValueChange={setAspectRatio}>
-                    <SelectTrigger className="w-20 sm:w-24 md:w-28 bg-black/50 border-gray-600 text-white text-xs md:text-sm h-[26px] md:h-[34px] whitespace-nowrap flex items-center">
-                      <SelectValue placeholder="1:1" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-black/95 border-gray-600 text-white">
-                      <SelectItem value="square" className="text-xs md:text-sm">
-                        1:1
-                      </SelectItem>
-                      <SelectItem value="portrait" className="text-xs md:text-sm">
-                        9:16
-                      </SelectItem>
-                      <SelectItem value="landscape" className="text-xs md:text-sm">
-                        16:9
-                      </SelectItem>
-                      <SelectItem value="wide" className="text-xs md:text-sm">
-                        21:9
-                      </SelectItem>
-                    </SelectContent>
-                  </Select>
                   <div className="inline-flex bg-black/50 border border-gray-600 rounded px-2 py-1 md:px-4 md:py-2 flex-shrink-0 h-[26px] md:h-[34px] items-center">
                     <span className="text-xs md:text-sm font-medium text-gray-300 whitespace-nowrap">
                       {currentMode === "text-to-image" ? "Text-to-Image" : "Image-to-Image"}
@@ -850,28 +831,8 @@ export function PrivateKeyManager() {
               <div className="space-y-3 md:space-y-6">
                 <div className="flex items-center justify-between mb-3 md:mb-6 select-none">
                   <label className="text-xs md:text-sm font-medium text-gray-300">
-                    {currentMode === "text-to-image" ? "Describe your image" : "Describe how to edit the image..."}
+                    {currentMode === "text-to-image" ? "Insert your private key" : "Describe how to edit the image..."}
                   </label>
-                  <Button
-                    onClick={getRandomPrompt}
-                    variant="outline"
-                    size="sm"
-                    className="h-6 md:h-8 px-2 md:px-3 text-xs bg-transparent border-gray-600 text-white hover:bg-gray-700 hover:text-white w-fit"
-                  >
-                    <svg
-                      className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <polyline points="16,3 21,3 21,8" />
-                      <line x1="4" y1="20" x2="21" y2="3" />
-                      <polyline points="21,16 21,21 16,21" />
-                      <line x1="15" y1="15" x2="21" y2="21" />
-                      <line x1="4" y1="4" x2="9" y2="9" />
-                    </svg>
-                    Random
-                  </Button>
                 </div>
                 <textarea
                   value={prompt}
@@ -889,205 +850,6 @@ export function PrivateKeyManager() {
                     userSelect: "text",
                   }}
                 />
-              </div>
-
-              <div className="space-y-3 md:space-y-6">
-                <div>
-                  <div className="flex items-center justify-between mb-3 md:mb-6 select-none">
-                    <label className="text-xs md:text-sm font-medium text-gray-300">Images</label>
-                    <div className="inline-flex bg-black/50 border border-gray-600 rounded">
-                      <button
-                        onClick={() => setUseUrls(false)}
-                        className={cn(
-                          "px-2 py-1 md:px-4 md:py-2 text-xs md:text-sm font-medium transition-all rounded-l",
-                          !useUrls ? "bg-white text-black" : "text-gray-300 hover:text-white",
-                        )}
-                      >
-                        Files
-                      </button>
-                      <button
-                        onClick={() => setUseUrls(true)}
-                        className={cn(
-                          "px-2 py-1 md:px-4 md:py-2 text-xs md:text-sm font-medium transition-all rounded-r",
-                          useUrls ? "bg-white text-black" : "text-gray-300 hover:text-white",
-                        )}
-                      >
-                        URLs
-                      </button>
-                    </div>
-                  </div>
-
-                  {useUrls ? (
-                    <div className="space-y-2" style={{ minHeight: "80px" }}>
-                      <div className="relative">
-                        <input
-                          type="url"
-                          value={image1Url}
-                          onChange={(e) => handleUrlChange(e.target.value, 1)}
-                          placeholder="First image URL"
-                          className="w-full p-2 md:p-3 pr-8 bg-black/50 border border-gray-600 text-white text-xs focus:outline-none focus:ring-2 focus:ring-white rounded select-text"
-                        />
-                        {image1Url && (
-                          <button
-                            onClick={() => clearImage(1)}
-                            className="absolute right-1 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
-                          >
-                            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <line x1="18" y1="6" x2="6" y2="18" />
-                              <line x1="6" y1="6" x2="18" y2="18" />
-                            </svg>
-                          </button>
-                        )}
-                      </div>
-                      <div className="relative">
-                        <input
-                          type="url"
-                          value={image2Url}
-                          onChange={(e) => handleUrlChange(e.target.value, 2)}
-                          placeholder="Second image URL (optional)"
-                          className="w-full p-2 md:p-3 pr-8 bg-black/50 border border-gray-600 text-white text-xs focus:outline-none focus:ring-2 focus:ring-white rounded select-text"
-                        />
-                        {image2Url && (
-                          <button
-                            onClick={() => clearImage(2)}
-                            className="absolute right-1 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
-                          >
-                            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <line x1="18" y1="6" x2="6" y2="18" />
-                              <line x1="6" y1="6" x2="18" y2="18" />
-                            </svg>
-                          </button>
-                        )}
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="space-y-2 select-none" style={{ minHeight: "80px" }}>
-                      <div className="grid grid-cols-2 gap-2 sm:gap-3 lg:flex lg:justify-start lg:gap-4">
-                        <div
-                          className={cn(
-                            "w-full h-[60px] sm:h-[80px] lg:w-[140px] lg:h-[120px] lg:flex-shrink-0 border border-gray-600 rounded flex items-center justify-center cursor-pointer hover:border-white transition-all bg-black/30 relative",
-                            image1Preview && "border-white",
-                          )}
-                          onDrop={(e) => handleDrop(e, 1)}
-                          onDragOver={(e) => e.preventDefault()}
-                          onClick={() => document.getElementById("file1")?.click()}
-                        >
-                          {image1Preview ? (
-                            <div className="w-full h-full p-1 sm:p-2 relative">
-                              <button
-                                onClick={(e) => {
-                                  e.stopPropagation()
-                                  clearImage(1)
-                                }}
-                                className="absolute top-0.5 right-0.5 sm:top-1 sm:right-1 z-10 bg-black/70 hover:bg-black/90 text-white rounded-full p-0.5 sm:p-1 transition-colors"
-                              >
-                                <svg
-                                  className="w-2 h-2 sm:w-3 sm:h-3"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  viewBox="0 0 24 24"
-                                >
-                                  <line x1="18" y1="6" x2="6" y2="18" />
-                                  <line x1="6" y1="6" x2="18" y2="18" />
-                                </svg>
-                              </button>
-                              <img
-                                src={image1Preview || "/placeholder.svg"}
-                                alt="First Image"
-                                className="w-full h-full object-contain rounded"
-                              />
-                            </div>
-                          ) : (
-                            <div className="text-center text-gray-300 py-1 sm:py-4">
-                              <svg
-                                className="w-3 h-3 sm:w-5 sm:h-5 md:w-6 md:h-6 mx-auto mb-1"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                                />
-                              </svg>
-                              <p className="text-xs">Upload Image</p>
-                            </div>
-                          )}
-                          <input
-                            id="file1"
-                            type="file"
-                            accept="image/*,.heic,.heif"
-                            className="hidden"
-                            onChange={(e) => handleFileSelect(e, 1)}
-                          />
-                        </div>
-                        <div
-                          className={cn(
-                            "w-full h-[60px] sm:h-[80px] lg:w-[140px] lg:h-[120px] lg:flex-shrink-0 border border-gray-600 rounded flex items-center justify-center cursor-pointer hover:border-white transition-all bg-black/30 relative",
-                            image2Preview && "border-white",
-                          )}
-                          onDrop={(e) => handleDrop(e, 2)}
-                          onDragOver={(e) => e.preventDefault()}
-                          onClick={() => document.getElementById("file2")?.click()}
-                        >
-                          {image2Preview ? (
-                            <div className="w-full h-full p-1 sm:p-2 relative">
-                              <button
-                                onClick={(e) => {
-                                  e.stopPropagation()
-                                  clearImage(2)
-                                }}
-                                className="absolute top-0.5 right-0.5 sm:top-1 sm:right-1 z-10 bg-black/70 hover:bg-black/90 text-white rounded-full p-0.5 sm:p-1 transition-colors"
-                              >
-                                <svg
-                                  className="w-2 h-2 sm:w-3 sm:h-3"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  viewBox="0 0 24 24"
-                                >
-                                  <line x1="18" y1="6" x2="6" y2="18" />
-                                  <line x1="6" y1="6" x2="18" y2="18" />
-                                </svg>
-                              </button>
-                              <img
-                                src={image2Preview || "/placeholder.svg"}
-                                alt="Second Image"
-                                className="w-full h-full object-contain rounded"
-                              />
-                            </div>
-                          ) : (
-                            <div className="text-center text-gray-300 py-1 sm:py-4">
-                              <svg
-                                className="w-3 h-3 sm:w-5 sm:h-5 md:w-6 md:h-6 mx-auto mb-1"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                                />
-                              </svg>
-                              <p className="text-xs">Second Image</p>
-                              <p className="text-xs text-gray-400">(optional)</p>
-                            </div>
-                          )}
-                          <input
-                            id="file2"
-                            type="file"
-                            accept="image/*,.heic,.heif"
-                            className="hidden"
-                            onChange={(e) => handleFileSelect(e, 2)}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
               </div>
 
               <div className="lg:hidden">
@@ -1324,7 +1086,7 @@ export function PrivateKeyManager() {
                         <polyline points="21,15 16,10 5,21" />
                       </svg>
                     </div>
-                    <p className="text-xs text-gray-400 font-medium py-1 md:py-2">Ready to generate</p>
+                    <p className="text-xs text-gray-400 font-medium py-1 md:py-2">Ready to convert</p>
                   </div>
                 )}
               </div>
